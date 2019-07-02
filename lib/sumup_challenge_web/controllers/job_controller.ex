@@ -24,6 +24,12 @@ defmodule SumupChallengeWeb.JobController do
 
   def show(conn, %{"id" => id}) do
     job = Processing.get_job!(id)
+    id_ordered_list = Processing.execute_job(job)
+    commands = Enum.map(id_ordered_list, fn id ->
+      task =  Processing.get_task!(id)
+      task
+    end)
+    job = Map.put(job, :tasks, commands)
     render(conn, "show.json", job: job)
   end
 

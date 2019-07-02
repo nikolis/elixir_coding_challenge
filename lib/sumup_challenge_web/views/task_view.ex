@@ -14,7 +14,6 @@ defmodule SumupChallengeWeb.TaskView do
     %{id: task.id,
       name: task.name,
       command: task.command,
-      requires: render_many(task.require, TaskView, "tasksimple.json")
      }
   end
 
